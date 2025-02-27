@@ -14,7 +14,8 @@
                     <input  @click="esci" type="submit" value="Sì, voglio uscire!">
                 </div>
             </div>
-            <div class="text_post" >
+             <!--------------------------------------------------PUBBLICA POST(POX)------------------------------------------------------------->
+             <div class="text_post" >
                 <h3>Condividi i tuoi pensieri!</h3>
                 <div class="post_input">
                 <label for="">Inserisci titolo:</label>
@@ -26,10 +27,10 @@
                 </div>
             </div>
             </div>
+            <!--------------------------------------------------MOSTRA POST(POSTS)------------------------------------------------------------->
             <div class="area_post" >
                 <div class="post" v-for="post in posts" >
-                 <h3>{{ post.username }}</h3>
-                 <div class="line"></div>
+                 <div class="line"><h3>{{ post.username }}</h3></div>
                  <h4><b>{{ post.titolo }}</b></h4>
                  <p>{{ post.testo }}</p> 
                  <h5>{{ post.data }}</h5>
@@ -53,15 +54,16 @@ const messaggio=ref();
 const showLogout=ref(false);
 
 
-
+//-------------------------------------------LOGOUT-------------------------------------------------------------------
 async function esci() {
-  
     sessionStorage.removeItem("token"); 
+    router.push("/");
 }
+//-------------------------------------------CLLOSE LOGOUT-------------------------------------------------------------------
 async function chiudi() {
     showLogout.value=false;
-    
 }
+
 const posts=ref({
     username:"",
     titolo:"",
@@ -81,7 +83,7 @@ function sleep(t){
     },t)
   });
 }
-
+//-------------------------------------------PUBBLICA POST(POX)-------------------------------------------------------------------
 async function pubblicaPost(){
 try {
     let config = {
@@ -102,7 +104,7 @@ try {
     //alert(error.response.data)
 }
 }
-
+//-------------------------------------------MOSTRA POST(POSTS)-------------------------------------------------------------------
 async function mostraPosts(){
     try { 
         let config = {
@@ -121,7 +123,6 @@ onMounted(()=> {
 </script>
 
 <style>
-
 .bodx{
     font-family: Arial, Helvetica, sans-serif;
     display: grid;
@@ -172,6 +173,7 @@ h3{
     flex-direction: row;
     padding:15px;
     font-size: 20px;
+    cursor: pointer;
 }
 /*-----------------------------------------CONTAINERX-----------------------------------------------------*/
 
@@ -179,9 +181,9 @@ h3{
     grid-row: 2/3;
     background-color: #e3c39d;
     color: rgb(34, 48, 63);
-    
 }
 .logoutCard{
+    color: white;
     margin-top: 500px;
     margin-left: 300px;
     display: flex;
@@ -195,11 +197,11 @@ h3{
     position: absolute;
     right: 10px;
     top: 10px;
-    color: rgb(34, 48, 63);
 }
 .text_post{
     z-index: 900;
-    background-color: #a4b5c4;
+    color: white;   /**VERIFICA PER PALETTE */
+    background-color: #6d9773;
     display: flex;
     flex-direction: column;
     width: 35%;
@@ -209,25 +211,32 @@ h3{
     justify-content: center;
     align-items: space-between;
     margin-left: 33.33%;
+
 }
 .line{
+    background-color: #6d9773;
+    height: 40%;
+    border-radius: 8px;
     width: 100%;
-    background-color: #cdd5db;
-    height: 2px;
+    color: #4b6382;
+    padding-bottom: 10px;
 }
 .post {
     z-index: 100;
-    background-color: #4b6382;
+    background-color: #155240;
     color: rgb(231, 232, 231);
     display: flex;
     flex-direction: column;
     text-align: left;
-    width: 50%;
+    width: 35%;
     /*border-radius: 10px 60px 30px; */
     padding: 10px;
-    margin: 20px 20px 20px 25%;
-    border: 3px solid #a4b5c4;
+    margin: 20px 20px 20px 638px;
+    border-radius: 8px;
     
+}
+.post button:hover{
+    background-color: #2b6454;
 }
 /*
 .post:nth-child(even){
@@ -240,6 +249,8 @@ h3{
 /*}*/
 .post h3{
     text-align: right;
+    padding-right: 10px;
+    color: white;
 }
 .post p{
     text-align: center;
@@ -275,7 +286,7 @@ textarea{
 
 .footer{
     grid-row: 3/4;
-    background-color: #071739;
+    background-color: #0c3b2e;
     color: rgb(231, 232, 231);
 }
 

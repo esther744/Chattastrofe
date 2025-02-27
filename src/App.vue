@@ -12,6 +12,33 @@
 *{
 font-family: "Montserrat", serif;
 }
+
+body{
+  margin: 0;
+}
+label{
+   padding-bottom: 5px;
+   padding-top: 2px;
+   text-align: left;
+   display: block;
+}
+h3 {
+    text-align: center;
+    font-weight: bold;
+}
+p{
+    display: block;
+    text-align: left;
+    padding-left: 20px;
+}
+ul{
+    text-align: left;
+}
+a{
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
 .overlay{
     background-color: rgba(0, 0, 0, 0.44);
     height: 100%;
@@ -19,13 +46,7 @@ font-family: "Montserrat", serif;
     position: absolute;
     z-index: 500;
 }
-
-body{
-  margin: 0;
-}
-
 .body{
-    
     background-color: #e3c39d;
     display: flex;
     flex-direction: column;
@@ -35,18 +56,24 @@ body{
     margin: 0;
     row-gap: 100px;
 }
-
+.form{
+    display: flex;
+    flex-direction: column;
+}.text-box{
+    border-radius: 4px;
+    border:1px solid lightgrey;
+    height: 30px;
+    
+}
 .pop{
   z-index: 1000;
-  background-color: #071739;
-  background-image: linear-gradient(to right, rgb(4, 173, 80) , #071739);
+  background-color: #4b6382;
   color: rgb(222, 231, 230);
   display: flex;
   flex-direction: column;
   text-align: center;
   border-radius: 8px;
   padding: 10px;
-  box-shadow: 10px 10px 20px rgb(179, 229, 243);
   width: 200px;
   height: 100px;
   position: fixed;
@@ -55,18 +82,16 @@ body{
 }
 .t span {
     color: greenyellow;
-    background-image: linear-gradient(to right, rgb(4, 173, 80) , rgb(14, 37, 64));
 }
 .f span {
     color: red;
-    background-image: linear-gradient(to right, rgb(173, 4, 4) , rgb(14, 37, 64));
 }
+
 .occhio{
   position: relative;
   display: flex;
   flex-direction: column;
 }
-
 .occhio span{
   position: absolute;
   right: 18px;
@@ -74,22 +99,25 @@ body{
   margin-top: 0px;
   margin-bottom: 0px;
   color: gray;
+  cursor: pointer;
 }
+
 .container{
     /*background-color:rgb(103, 224, 233);*/
     z-index: 900;
-    background-color: #a4b5c4;
+    background-color: #6d9773;
     display: flex;
     flex-direction: column;
     text-align: left;
     width: 35%;
     border-radius: 8px;
     padding: 10px;
-    
+    color: white;
 }
+
 .text_post{
     z-index: 900;
-    background-color: #a4b5c4;
+    background-color: #6d9773;
     display: flex;
     flex-direction: column;
     width: 35%;
@@ -106,49 +134,59 @@ body{
     text-align: left;
     display: block;
 }
-
+span{
+  cursor: pointer;
+}
 .button{
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 .button > input[type="submit"]{
-    background-color: #4b6382;
+    background-color: #0c3b2e;
     text-transform: uppercase;
     margin-top: 20px;
     border-radius: 20px;
     border: none;
     height: 40px;
     width: 200px;
-
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s;
 }
 .button > input[type="submit"]:hover{
-    color: black;
-    background-color: #cdd5db;
-    border: 2px solid #4b6382;
+   font-weight:bold ;
+    background-color: #155240;
+    border: 2px solid #0c3b2e;
    /* transition: background-color 0.5s, transform 0.5s;
     transform: scale(1.1);*/
     animation-name: example;
     animation-duration: 4s;
     position: relative;
+    cursor: pointer;
+    transform: scale(1.1);
 }
 .button button{
-  background-color: #4b6382;
+  background-color: #0c3b2e;
     text-transform: uppercase;
     margin-top: 20px;
     border-radius: 20px;
     border: none;
     height: 40px;
     width: 200px;
-
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s;
 }
 .button button:hover{
-  color: black;
-    background-color: #cdd5db;
-    border: 2px solid #4b6382;
+   font-weight:bold ;
+    background-color: #155240;
+    border: 2px solid #0c3b2e;
     animation-name: example;
     animation-duration: 4s;
     position: relative;
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 </style>

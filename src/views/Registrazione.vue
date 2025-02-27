@@ -34,7 +34,7 @@
         </div>
         <p>Sei già iscritto? <router-link to="/">Accedi</router-link></p>
     </div>
-    <img  class="logo" src="../assets/Chattastrofe-removebg-preview(1).png" alt="logo" style="width: 300px;">
+    <img  class="logo" src="../assets/Chattastrofe__2.png" alt="logo" style="width: 300px;">
   </div>
 </template>
 
@@ -61,7 +61,7 @@ function sleep(t){
     },t)
   });
 }
-
+//---------------------------------------------------INVIA DATI- REGISTRAZIONE--------------------------------------------------------------
 async function inviaDati(){
 
   try {
@@ -92,66 +92,4 @@ async function inviaDati(){
 
 
 <style>
-
-.pop{
-  z-index: 1000;
-  background-color: red;
-  display: flex;
-    flex-direction: column;
-    text-align: center;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 10px 10px 20px lightgray;
-  width: auto;
-  height: 40px;
-  position: fixed;
-  align-items: center;
-  justify-content: center;
-}
-
-.form{
-    display: flex;
-    flex-direction: column;
-   
-}
-
-label{
-   
-   padding-bottom: 5px;
-   padding-top: 2px;
-   text-align: left;
-   display: block;
-
-}
-
-.text-box{
-    border-radius: 4px;
-    border:1px solid lightgrey;
-    height: 30px;
-    
-}
-
-h3 {
-    text-align: center;
-    font-weight: bold;
-}
-
-p{
-    display: block;
-    text-align: left;
-    padding-left: 20px;
-}
-
-ul{
-   
-    text-align: left;
-}
-
-a{
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-
 </style>

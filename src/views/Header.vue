@@ -4,7 +4,7 @@
     <div class="header">
             <div class="nav">
                
-               <router-link to="/home"><img  class="logo" src="../assets/Chattastrofe-removebg-preview.png" alt="logo"></router-link>
+               <router-link to="/home"><img  class="logo" src="../assets/Chattastrofe__2.png" alt="logo"></router-link>
                 <ul class="nav_bar">
                     <li class="nav_item"><span class="material-symbols-outlined">home</span>  <router-link to="/home">Home</router-link>
                     </li>

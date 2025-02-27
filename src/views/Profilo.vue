@@ -5,7 +5,22 @@
     <Header @logout="showLogout=true" />
     <!-----------------------------------CONTAINERX------------------------------------------>
     <div class="containerx prova">
-    <div v-if="showProfiloCard || showLogout || showCardUpdate" class="overlay"></div>
+                  <!-----------------------------------MODIFICA POST------------------------------------------>
+
+                  <div v-if="showProfiloCard || showLogout || showCardUpdate" class="overlay"></div>
+
+                  <div v-if="showCardUpdate" class="cardUpdate text_post">
+                    <span @click="chiudiQuattro" class="material-symbols-outlined">close</span>
+                    <h3 >{{ dio.username }}</h3>
+                    <div class="line"></div>
+                        <label for="name">Testo:</label>
+                        <input type="text" class="text-box" v-model="dio.titolo" placeholder="Modifica titolo.">
+                        <label for="name">Descrizione:</label>
+                        <input type="text" class="text-box" v-model="dio.testo" placeholder="Modifica descrizione">
+                        <div class="button">
+                            <input  @click="modificaPost(dio);chiudiQuattro()" type="submit" style="color: white;" value="Conferma modifica">
+                        </div>
+                    </div>
 
     <!-----------------------------------LOGOUT------------------------------------------>
         <div v-if="showLogout" class="logoutCard text_post">
@@ -22,8 +37,8 @@
             <div class="button">
             <button @click="updateProfilo">Modifica Profilo</button>
             </div>
-            <!---<h3>Username:{{ utente.username }} </h3>
-            <h3>Nome:{{ utente.nome }}    Cognome:{{  utente.cognome }}</h3>
+            <!---<h3>Username:{{ utenti.username }} </h3>
+            <h3>Nome:{{ utenti.nome }}    Cognome:{{  utenti.cognome }}</h3>
         -->
             <div v-if="utentePresente" >
                 <h3>Età:{{ utenti.eta }}</h3>
@@ -36,7 +51,7 @@
             </div>
 
         </div>
-<!-----------------------------------PROFILO CARD------------------------------------------>
+<!-----------------------------------PROFILO CARD(UTENTI)------------------------------------------>
 
         <div v-if="showProfiloCard" class="profiloForm text_post">
             <h3>Aggiorna il tuo profilo</h3>
@@ -61,7 +76,7 @@
             <input v-model="utenti.professione" class="text-box" type="text" id="name" name="name" placeholder="Inserisci Professione..." >
     
             <label for="name">Hobby:</label>
-            <input v-model="utenti.hobby" class="text-box" type="text" id="name" name="name" placeholder="Inserisci Hpbby..." >
+            <input v-model="utenti.hobby" class="text-box" type="text" id="name" name="name" placeholder="Inserisci Hobby..." >
     
             <div class="button">
             <input  @click="aggiornaProfilo" type="submit" value="Invia">
@@ -70,33 +85,23 @@
         </div>
 <!-----------------------------------AREA POST------------------------------------------>
 
-        <div class="area_post profilo" >
-                <div class="post" v-for="dio in posts" >
-                 <h3 >{{ dio.username }}</h3>
-                 <div class="line"></div>
-                 <h4><b>{{ dio.titolo }}</b></h4>
-                 <p>{{ dio.testo }}</p> 
-                 <h5>{{ dio.data }}</h5>
-                 <input  @click="eliminaPost(dio)" type="submit" value="Elimina">
-                 <div class="button">
-                 <button @click="updatePost">Modifica</button>
-                 </div>
-                 <div v-if="showCardUpdate" class="cardUpdate text_post">
-                    <span @click="chiudiQuattro" class="material-symbols-outlined">close</span>
-                    <h3 >{{ dio.username }}</h3>
-                    <div class="line"></div>
-                        <label for="name">Testo:</label>
-                        <input type="text" class="text-box" v-model="dio.titolo" placeholder="Modifica titolo.">
-                        <label for="name">Descrizione:</label>
-                        <input type="text" class="text-box" v-model="dio.testo" placeholder="Modifica descrizione">
-                        <div class="button">
-                        <input  @click="modificaPost(dio)" type="submit" value="Conferma modifica">
-                        </div>
-                    </div>
-                 </div>
-        </div>
-            <br>
-    </div>
+<div class="area_post profilo" >
+            <div class="post postProfilo" v-for="dio in posts" >
+                <div class="line"><h3>{{ dio.username }}</h3></div>
+                   
+                    <h4><b>{{ dio.titolo }}</b></h4>
+                    <p>{{ dio.testo }}</p> 
+                    <h5>{{ dio.data }}</h5>
+                    <span @click="eliminaPost(dio)" class="material-symbols-outlined delete">delete</span>
+                    <div class="button">
+                        <button @click="updatePost(dio)" style="color: white;">Modifica</button>
+                     </div>
+            </div>
+
+</div>
+        
+        <br>
+</div>
      <!-----------------------------------FOOTER------------------------------------------>
      <Footer />
 </div>
@@ -109,41 +114,58 @@ import  axios  from 'axios';
 import { onMounted } from 'vue';
 import Header from '@/views/Header.vue'
 import Footer from '@/views/Footer.vue'
-
+//-------------------------------------------LOGOUT-------------------------------------------------------------------
 const showLogout=ref(false);
 async function esci() {
-  
   sessionStorage.removeItem("token"); 
+  router.push("/")
+
 }
 const utentePresente=ref(false)
 const showProfiloCard=ref(false);
+//-------------------------------------------MOSTRA UPDATE PROFILO-------------------------------------------------------------------
 async function updateProfilo() {
     showProfiloCard.value=true;
 }
+//-------------------------------------------CHIUDE PROFILO CARD-------------------------------------------------------------------
 async function chiudiDue() {
     showProfiloCard.value=false;
-    
 }
+//-------------------------------------------CHIUDE LOGOUT-------------------------------------------------------------------
 async function chiudiTre() {
     showLogout.value=false;
-    
 }
+//-------------------------------------------MOSTRA CARD UPDATE-------------------------------------------------------------------
+async function updatePost(postSelezionato) {
+    dio.value={...postSelezionato}
+    showCardUpdate.value=true;
+}
+//-------------------------------------------CHIUDE CARD UPDATE-------------------------------------------------------------------
 const showCardUpdate=ref(false);
 async function chiudiQuattro() {
     showCardUpdate.value=false;
-    
 }
-async function updatePost() {
-    showCardUpdate.value=true;
-}
+const dio=ref({    
+    titolo:"",
+    testo:"",
+    username:"",
+    data:"",
+    id:""
+});
 const messaggio=ref();
 const posts=ref({
     titolo:"",
     testo:"",
-    username:""
+    username:"",
+    data:"",
+    id:""
 })
 
 const utenti= ref({ 
+    id:"",
+    nome:"",
+    cognome:"",
+  username:"",
   eta:"",
   sesso:"",
   email:"",
@@ -170,18 +192,14 @@ try {
     let config = {
             headers: {'Authorization': 'Bearer ' + sessionStorage.getItem("token")
         }}
-    const response = await axios.post("http://192.168.125.165:3000/profilo/datiutente", config)
-    messaggio.value= response.data;
-    await sleep(1000);
-    messaggio.value="";
-} catch (error){
-    messaggio.value = error.response.data;
-    console.log(error.response.data);
-    await sleep(1000);
-    messaggio.value="";
-    //alert(error.response.data)
+    const response = await axios.get("http://192.168.125.165:3000/profilo/datiutente", config)
+       utenti.value = response.data;
+       console.log(response)
+    }catch (error) {
+        console.log(error.message);
+    } 
 }
-}
+
 onMounted(()=> {
     datiUtente();
 });
@@ -219,6 +237,7 @@ try {
     console.log(response.data);
     messaggio.value= response.data;
     chiudiQuattro();
+    mostraMieiPosts();
     await sleep(1000);
     messaggio.value="";
 } catch (error){
@@ -289,8 +308,12 @@ async function eliminaPost(dio){
     margin-top: 80px;
     position: relative;
 }
+.postProfilo{
+    margin-left: 450px;
+    width: 45%;
+}
 .sidebar{
-  background: #a4b5c4;
+  background: #6d9773;
   color: black;
   padding: 20px;
   display: flex;
@@ -310,6 +333,8 @@ font-size: 100px;
     height: 600px;
     position: absolute;
     z-index: 1000;
+    margin-top: 0px;
+    top: 20px;
 }
 .profiloForm span{
     position: absolute;
@@ -319,13 +344,18 @@ font-size: 100px;
 }
 .cardUpdate{
     position: absolute;
+    top: 0;
     color: black;
-    z-index: 600;
     margin-left: 90px;
+   z-index: 800;
 }
 .area_post{
     position: relative;
     margin: 0;
     z-index: 6;
+}
+.delete{
+cursor: pointer;
+    
 }
 </style>

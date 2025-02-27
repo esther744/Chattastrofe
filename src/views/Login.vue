@@ -30,7 +30,7 @@
         </div>
         <p>Non sei iscritto? <router-link to="/registrazione">Registrati!</router-link></p>
     </div>
-    <img  class="logo" src="../assets/Chattastrofe-removebg-preview(1).png" alt="logo" style="width: 300px;">
+    <img  class="logo" src="../assets/Chattastrofe__2.png" alt="logo" style="width: 300px;">
   </div>
 </template>
 
@@ -58,7 +58,7 @@ function sleep(t){
     },t)
   });
 }
-
+//---------------------------------------------------LOGIN--------------------------------------------------------------
 async function login(){
     try {
         const response=await axios.post("http://192.168.125.165:3000/login",  {username:utente.value.username, password:utente.value.password})
@@ -89,66 +89,4 @@ onMounted(()=> {
 </script>
 
 <style>
-
-.form{
-    display: flex;
-    flex-direction: column;
-
-   
-}
-
-label{
-   
-   padding-bottom: 5px;
-   padding-top: 2px;
-   text-align: left;
-   display: block;
-
-}
-.occhio{
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-.occhio span{
-  position: absolute;
-  right: 18px;
-  bottom: 4px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  color: gray;
-}
-
-.text-box{
-    border-radius: 4px;
-    border:1px solid lightgrey;
-    height: 30px;
-    
-}
-
-h3 {
-    text-align: center;
-    font-weight: bold;
-}
-
-p{
-    display: block;
-    text-align: left;
-    padding-left: 20px;
-}
-
-ul{
-   
-    text-align: left;
-}
-
-a{
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-
-
 </style>
